@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.12",
+    "nuxt-icon": "^0.1.7",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.1.0"
+  },
+  "dependencies": {
+    "@nuxtjs/composition-api": "^0.33.1",
+    "@pinia/nuxt": "^0.4.3",
+    "lucide-vue-next": "^0.92.0",
+    "pinia": "^2.0.23",
+    "pinia-plugin-persistedstate": "^2.3.0"
+  }
+}

@@ -1,0 +1,39 @@
+@font-face {
+    font-family: Gilroy-Medium;
+    src: url("~/assets/fonts/Gilroy-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gilroy-Bold;
+    src: url("~/assets/fonts/Gilroy-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Gilroy-Black;
+    src: url("~/assets/fonts/Gilroy-Black.ttf") format("truetype");
+}
+
+:root {
+    --background-color-primary: #ebebeb;
+    --background-color-secondary: #fafafa;
+    --accent-color: #cacaca;
+    --text-primary-color: #222;
+    --shadow: rgba(149, 157, 165, 0.322);
+
+    &.dark-theme {
+        --background-color-primary: #1e1e1e;
+        --background-color-secondary: #2d2d30;
+        --accent-color: #3f3f3f;
+        --text-primary-color: #fff;
+        --shadow: rgba(0, 0, 0, 0.438);
+    }
+}
+
+body {
+    font-family: Gilroy-Medium;
+    padding: 0;
+    margin: 0;
+    background-color: var(--background-color-primary);
+    color: var(--text-primary-color);
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+}
