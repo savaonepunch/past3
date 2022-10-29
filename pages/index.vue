@@ -56,15 +56,6 @@ const pasteInput = ref(null);
 const titleInput = ref(null);
 const authorInput = ref(null);
 
-// const { data: pastes } = await useAsyncData('pastes', () => $fetch('http://localhost:8000/pastes'))
-
-// useHead({
-//     meta: [
-//         { name: 'og:title', content: pastes.value[0].title },
-//         { name: 'og:description', content: pastes.value[0].paste },
-//     ]
-// });
-
 const themeStore = useThemeStore();
 
 const changeTheme = () => {
@@ -80,7 +71,7 @@ const handleSave = async () => {
 
 
         if (title.value && author.value && paste.value) {
-            const res = await $fetch('http://192.168.50.237:8000/pastes', {
+            const res = await $fetch('https://past3-api.onrender.com/pastes', {
                 method: 'POST',
                 body: {
                     title: title.value,

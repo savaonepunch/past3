@@ -19,7 +19,7 @@
 <script setup>
 const route = useRoute()
 
-const { data: paste } = await useAsyncData(route.params.id, () => $fetch(`http://192.168.50.237:8000/pastes/${route.params.id}`))
+const { data: paste } = await useAsyncData(route.params.id, () => $fetch(`https://past3-api.onrender.com/pastes/${route.params.id}`))
 
 // const { data: paste } = await useFetch(`http://localhost:8000/pastes/${route.params.id}`);
 
