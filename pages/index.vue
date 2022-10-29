@@ -7,18 +7,18 @@
             <div class="paste-container">
                 <div class="paste">
                     <label for="paste">Your paste: </label>
-                    <textarea id="paste"></textarea>
+                    <textarea ref="pasteInput" v-model="paste" id="paste"></textarea>
                 </div>
             </div>
             <div class="options-container">
                 <div class="option">
                     <label for="author">Author: </label>
-                    <input type="text" id="author" />
+                    <input ref="authorInput" v-model="author" type="text" id="author" />
                 </div>
 
                 <div class="option">
                     <label for="title">Title: </label>
-                    <input type="text" id="title" />
+                    <input ref="titleInput" v-model="title" type="text" id="title" />
                 </div>
 
                 <div class="option">
@@ -35,11 +35,11 @@
                 </div>
 
                 <div class="buttons">
-                    <button id="save">
+                    <button @click="handleSave" id="save">
                         Save
                         <Icon id="icon" name="lucide:save" />
                     </button>
-                    <button id="clear">
+                    <button @click="handleDelete" id="clear">
                         Delete
                         <Icon id="icon" name="lucide:trash" />
                     </button>
@@ -50,24 +50,79 @@
 </template>
 
 <script setup>
-const themeStore = useThemeStore();
-// const darkMode = useCookie('darkMode');
 
-onMounted(() => {
-    console.log(themeStore.darkMode);
-    // themeStore.darkMode = darkMode.value;
-    // console.log(darkMode.value);
-    document.documentElement.classList.toggle("dark-theme", themeStore.darkMode);
-});
+const paste = ref('');
+const title = ref('');
+const author = ref('');
+
+const pasteInput = ref(null);
+const titleInput = ref(null);
+const authorInput = ref(null);
+
+// const { data: pastes } = await useAsyncData('pastes', () => $fetch('http://localhost:8000/pastes'))
+
+// useHead({
+//     meta: [
+//         { name: 'og:title', content: pastes.value[0].title },
+//         { name: 'og:description', content: pastes.value[0].paste },
+//     ]
+// });
+
+const themeStore = useThemeStore();
 
 const changeTheme = () => {
     themeStore.darkMode = !themeStore.darkMode;
-    // darkMode.value = themeStore.darkMode;
     document.documentElement.classList.toggle("dark-theme", themeStore.darkMode);
 };
+
+const handleSave = async () => {
+    try {
+        console.log(paste.value);
+        console.log(title.value);
+        console.log(author.value);
+
+
+        if (title.value && author.value && paste.value) {
+            const res = await $fetch('http://192.168.50.237:8000/pastes', {
+                method: 'POST',
+                body: {
+                    title: title.value,
+                    author: author.value,
+                    paste: paste.value,
+                }
+            });
+
+            pasteInput.value.classList.toggle("empty-input", !paste.value);
+            titleInput.value.classList.toggle("empty-input", !title.value);
+            authorInput.value.classList.toggle("empty-input", !author.value);
+
+            console.log(`Paste id: ${res.newPaste._id}`);
+            await navigateTo(`/pastes/${res.newPaste._id}`);
+        } else {
+            pasteInput.value.classList.toggle("empty-input", !paste.value);
+            titleInput.value.classList.toggle("empty-input", !title.value);
+            authorInput.value.classList.toggle("empty-input", !author.value);
+
+            console.log("Red fields cannot be empty");
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const handleDelete = () => {
+    title.value = '';
+    author.value = '';
+    paste.value = '';
+}
 </script>
 
 <style lang="scss" scoped>
+.empty-input {
+    border-color: red !important;
+}
+
 button#themeToggle {
     all: unset;
     display: flex;
@@ -130,7 +185,7 @@ div.container {
             height: 600px;
             width: 100%;
             transition: box-shadow .2s ease-in-out;
-            word-wrap:break-word;
+            word-wrap: break-word;
 
             &:hover {
                 box-shadow: var(--shadow) 0px 7px 29px 0px;
@@ -140,6 +195,7 @@ div.container {
                 outline-width: 0;
                 box-shadow: var(--shadow) 0px 7px 29px 0px;
             }
+
         }
 
         @media only screen and (max-width: 900px) {
