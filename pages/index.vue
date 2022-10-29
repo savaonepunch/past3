@@ -25,10 +25,7 @@
                     <label for="syntax">Syntax Highlighting: </label>
                     <div class="wrapper">
                         <select type="text" id="syntax">
-                            <option value="volvo">None</option>
-                            <option value="saab">C++</option>
-                            <option value="mercedes">JavaScript</option>
-                            <option value="audi">Python</option>
+                            <option value="None">None (Coming soon)</option>
                         </select>
                     </div>
 
@@ -192,7 +189,7 @@ div.container {
             }
 
             &:focus {
-                outline-width: 0;
+                outline: none;
                 box-shadow: var(--shadow) 0px 7px 29px 0px;
             }
 
@@ -237,7 +234,7 @@ div.container {
                 }
 
                 &:focus {
-                    outline-width: 0;
+                    outline: none;
                     box-shadow: var(--shadow) 0px 7px 29px 0px;
                 }
             }
@@ -266,7 +263,7 @@ div.container {
                     }
 
                     &:focus {
-                        outline-width: 0;
+                        outline: none;
                         box-shadow: var(--shadow) 0px 7px 29px 0px;
                     }
                 }
