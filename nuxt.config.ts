@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['stores'],
   },
-  css: ["~/assets/main.scss"],
+  css: ["~/assets/main.scss", "~/assets/prisma-theme.css"],
   modules: [
     "nuxt-icon",
     [

@@ -24,8 +24,13 @@
                 <div class="option">
                     <label for="syntax">Syntax Highlighting: </label>
                     <div class="wrapper">
-                        <select type="text" id="syntax">
-                            <option value="None">None (Coming soon)</option>
+                        <select v-model="syntax" id="syntax">
+                            <option value="text">None</option>
+                            <option value="markup">Markdown</option>
+                            <option value="css">CSS</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="java">Java</option>
+                            <option value="cpp">C/C++</option>
                         </select>
                     </div>
 
@@ -51,6 +56,7 @@
 const paste = ref('');
 const title = ref('');
 const author = ref('');
+const syntax = ref('text');
 
 const pasteInput = ref(null);
 const titleInput = ref(null);
@@ -68,6 +74,7 @@ const handleSave = async () => {
         console.log(paste.value);
         console.log(title.value);
         console.log(author.value);
+        console.log(syntax.value);
 
 
         if (title.value && author.value && paste.value) {
@@ -77,6 +84,7 @@ const handleSave = async () => {
                     title: title.value,
                     author: author.value,
                     paste: paste.value,
+                    syntax: syntax.value,
                 }
             });
 

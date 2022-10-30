@@ -4,7 +4,8 @@
             <p>Title: <span>{{ paste.title }}</span></p>
             <p>Author: <span>{{ paste.author }}</span></p>
             <div id="paste">
-                <textarea readonly>{{paste.paste}}</textarea>
+                <prism id="prism" :language="paste.syntax">{{paste.paste}}</prism>
+                <!-- <textarea readonly>{{paste.paste}}</textarea> -->
             </div>
         </div>
         <p v-else>Couldn't find paste with ID: {{route.params.id}}</p>
@@ -17,6 +18,8 @@
 </template>
 
 <script setup>
+import Prism from 'vue-prism-component'
+
 const route = useRoute()
 
 const { data: paste } = await useAsyncData(route.params.id, () => $fetch(`https://past3-api.onrender.com/pastes/${route.params.id}`))
@@ -41,6 +44,9 @@ const handleNewPaste = async () => {
 </script>
 
 <style lang="scss" scoped>
+
+
+
 div.container {
     box-sizing: border-box;
     padding: 30px;
@@ -56,33 +62,13 @@ div.container {
     }
 }
 
-div#paste {
-    max-width: 500px;
-    height: 500px;
-    margin: 30px 0px;
+#prism {
+    margin: 30px 0;
+    height: 600px;
+    transition: box-shadow .2s ease-in-out;
 
-    & textarea {
-        background-color: var(--background-color-secondary);
-        color: var(--text-primary-color);
-        width: 100%;
-        height: 100%;
-        border: none;
-        resize: none;
-        box-sizing: border-box;
-        border-radius: 20px;
-        padding: 20px;
-        border: 1px solid var(--accent-color);
-        transition: box-shadow .2s ease-in-out;
-
-        &:hover {
-            box-shadow: var(--shadow) 0px 7px 29px 0px;
-        }
-
-        &:focus {
-            outline: none;
-            box-shadow: var(--shadow) 0px 7px 29px 0px;
-        }
-
+    &:hover {
+        box-shadow: var(--shadow) 0px 7px 29px 0px;
     }
 }
 
