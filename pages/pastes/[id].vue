@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-        <div v-if="paste">
+        <div v-if="paste !== undefined">
             <p>Title: <span>{{ paste.title }}</span></p>
             <p>Author: <span>{{ paste.author }}</span></p>
             <div id="paste">
-                <prism id="prism" :language="'text'">{{paste.paste}}</prism>
+                <prism id="prism" :language="paste.syntax !== undefined ? paste.syntax : 'text'">{{paste.paste}}</prism>
                 <!-- <textarea readonly>{{paste.paste}}</textarea>
                 <textarea readonly>{{paste.syntax}}</textarea> -->
             </div>
