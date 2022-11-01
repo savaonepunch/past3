@@ -5,7 +5,7 @@
             <p>Author: <span>{{ paste.author }}</span></p>
             <div id="paste">
                 <!-- <p>{{paste.syntax}}</p> -->
-                <!-- <prism v-if="loadSyntax" id="prism" :language="paste.syntax">{{paste.paste}}</prism> -->
+                <prism id="prism" :language="console.log(paste.syntax)">{{paste.paste}}</prism>
                 <!-- <textarea readonly>{{paste.paste}}</textarea>
                 <textarea readonly>{{paste.syntax}}</textarea> -->
             </div>
@@ -44,9 +44,9 @@ onBeforeMount(() => {
 onMounted(() => {
     console.log(paste.value.syntax);
     // console.log(route.params.id);
-    setTimeout(() => {
-        loadSyntax.value = true;
-    }, 3000);
+    // setTimeout(() => {
+    //     loadSyntax.value = true;
+    // }, 3000);
 })
 
 const handleNewPaste = async () => {
