@@ -3,8 +3,8 @@
         <div v-if="paste">
             <p>Title: <span>{{ paste.title }}</span></p>
             <p>Author: <span>{{ paste.author }}</span></p>
-            <div v-if="paste.syntax" id="paste">
-                <prism id="prism" language="text">{{paste.paste}}</prism>
+            <div v-if="loadSyntax" id="paste">
+                <prism id="prism" language="java">{{paste.paste}}</prism>
             </div>
         </div>
         <p v-else>Couldn't find paste with ID: {{route.params.id}}</p>
@@ -40,10 +40,10 @@ onBeforeMount(() => {
 
 onMounted(() => {
     console.log(paste.value.syntax);
-    // console.log(route.params.id);
-    // setTimeout(() => {
-    //     loadSyntax.value = true;
-    // }, 3000);
+    console.log(route.params.id);
+    setTimeout(() => {
+        loadSyntax.value = true;
+    }, 1000);
 })
 
 const handleNewPaste = async () => {
