@@ -4,8 +4,8 @@
             <p>Title: <span>{{ paste.title }}</span></p>
             <p>Author: <span>{{ paste.author }}</span></p>
             <div id="paste">
-                <p>{{paste.syntax}}</p>
-                <!-- <prism id="prism" :language="paste.syntax ? paste.syntax : 'text'">{{paste.paste}}</prism> -->
+                <!-- <p>{{paste.syntax}}</p> -->
+                <prism v-if="paste.syntax" id="prism" :language="paste.syntax ? paste.syntax : 'text'">{{paste.paste}}</prism>
                 <!-- <textarea readonly>{{paste.paste}}</textarea>
                 <textarea readonly>{{paste.syntax}}</textarea> -->
             </div>
@@ -46,9 +46,6 @@ const handleNewPaste = async () => {
 </script>
 
 <style lang="scss" scoped>
-
-
-
 div.container {
     box-sizing: border-box;
     padding: 30px;
