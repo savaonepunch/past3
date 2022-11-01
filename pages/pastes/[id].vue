@@ -5,7 +5,7 @@
             <p>Author: <span>{{ paste.author }}</span></p>
             <div id="paste">
                 <!-- <p>{{paste.syntax}}</p> -->
-                <prism id="prism" language="poop">{{paste.paste}}</prism>
+                <prism id="prism" language="text">{{paste.paste}}</prism>
                 <!-- <textarea readonly>{{paste.paste}}</textarea>
                 <textarea readonly>{{paste.syntax}}</textarea> -->
             </div>
