@@ -3,7 +3,7 @@
         <div v-if="paste">
             <p>Title: <span>{{ paste.title }}</span></p>
             <p>Author: <span>{{ paste.author }}</span></p>
-            <div id="paste">
+            <div v-if="paste?.syntax" id="paste">
                 <prism id="prism" :language="paste.syntax">{{paste.paste}}</prism>
             </div>
         </div>
