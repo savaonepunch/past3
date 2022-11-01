@@ -4,7 +4,7 @@
             <p>Title: <span>{{ paste.title }}</span></p>
             <p>Author: <span>{{ paste.author }}</span></p>
             <div v-if="paste?.syntax" id="paste">
-                <prism id="prism" :language="'java'">{{paste.paste}}</prism>
+                <prism id="prism" :language="'text'">{{paste.paste}}</prism>
             </div>
         </div>
         <p v-else>Couldn't find paste with ID: {{route.params.id}}</p>
@@ -17,12 +17,6 @@
 </template>
 
 <script setup>
-import 'prismjs'
-import 'prismjs/components/prism-clike'
-import 'prismjs/components/prism-java'
-import 'prismjs/components/prism-c'
-import 'prismjs/components/prism-cpp'
-
 import Prism from 'vue-prism-component'
 
 const route = useRoute();
