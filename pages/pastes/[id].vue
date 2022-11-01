@@ -3,9 +3,9 @@
         <div v-if="paste">
             <p>Title: <span>{{ paste.title }}</span></p>
             <p>Author: <span>{{ paste.author }}</span></p>
-            <!-- <div v-if="paste.syntax" id="paste">
-                <prism id="prism" language="java">{{paste.paste}}</prism>
-            </div> -->
+            <div v-if="paste.syntax" id="paste">
+                <prism id="prism" language="text">{{paste.paste}}</prism>
+            </div>
         </div>
         <p v-else>Couldn't find paste with ID: {{route.params.id}}</p>
 
