@@ -3,7 +3,7 @@
         <div v-if="paste">
             <p>Title: <span>{{ paste.title }}</span></p>
             <p>Author: <span>{{ paste.author }}</span></p>
-            <div v-if="loadSyntax" id="paste">
+            <div id="paste">
                 <prism id="prism" language="java">{{paste.paste}}</prism>
             </div>
         </div>
@@ -41,9 +41,9 @@ onBeforeMount(() => {
 onMounted(() => {
     console.log(paste.value.syntax);
     console.log(route.params.id);
-    setTimeout(() => {
-        loadSyntax.value = true;
-    }, 1000);
+    // setTimeout(() => {
+    //     loadSyntax.value = true;
+    // }, 1000);
 })
 
 const handleNewPaste = async () => {
