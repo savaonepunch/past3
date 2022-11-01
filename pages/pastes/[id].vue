@@ -5,7 +5,7 @@
             <p>Author: <span>{{ paste.author }}</span></p>
             <div id="paste">
                 <!-- <prism id="prism" :language="paste?.syntax ? paste?.syntax : 'text'">{{paste.paste}}</prism> -->
-                <!-- <textarea readonly>{{paste.paste}}</textarea> -->
+                <textarea readonly>{{paste.paste}}</textarea>
             </div>
         </div>
         <p v-else>Couldn't find paste with ID: {{route.params.id}}</p>
