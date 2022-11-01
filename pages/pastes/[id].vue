@@ -5,7 +5,7 @@
             <p>Author: <span>{{ paste.author }}</span></p>
             <div id="paste">
                 <!-- <p>{{paste.syntax}}</p> -->
-                <prism v-if="paste.syntax" id="prism" :language="'undefined'">{{paste.paste}}</prism>
+                <prism v-if="paste.syntax" id="prism" :language="undefined">{{paste.paste}}</prism>
                 <!-- <textarea readonly>{{paste.paste}}</textarea>
                 <textarea readonly>{{paste.syntax}}</textarea> -->
             </div>
