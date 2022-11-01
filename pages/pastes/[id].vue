@@ -5,7 +5,7 @@
             <p>Author: <span>{{ paste.author }}</span></p>
             <div id="paste">
                 <!-- <p>{{paste.syntax}}</p> -->
-                <prism v-if="paste.syntax != 'undefined'" id="prism" :language="paste.syntax">{{paste.paste}}</prism>
+                <prism v-if="loadSyntax" id="prism" :language="paste.syntax">{{paste.paste}}</prism>
                 <!-- <textarea readonly>{{paste.paste}}</textarea>
                 <textarea readonly>{{paste.syntax}}</textarea> -->
             </div>
@@ -22,7 +22,8 @@
 <script setup>
 import Prism from 'vue-prism-component'
 
-const route = useRoute()
+const route = useRoute();
+const loadSyntax = ref(false);
 
 const { data: paste } = await useAsyncData(route.params.id, () => $fetch(`https://past3-api.onrender.com/pastes/${route.params.id}`))
 
@@ -40,6 +41,9 @@ onMounted(() => {
     console.log('eeee');
     console.log(paste.value.syntax);
     // console.log(route.params.id);
+    setTimeout(() => {
+        loadSyntax.value = true;
+    }, 3000);
 })
 
 const handleNewPaste = async () => {
