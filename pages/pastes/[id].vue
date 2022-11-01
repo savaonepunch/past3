@@ -5,7 +5,7 @@
             <p>Author: <span>{{ paste.author }}</span></p>
             <div id="paste">
                 <!-- <p>{{paste.syntax}}</p> -->
-                <prism v-if="paste.syntax" id="prism" :language="paste.syntax">{{paste.paste}}</prism>
+                <prism v-if="paste.syntax" id="prism" :language="'undefined'">{{paste.paste}}</prism>
                 <!-- <textarea readonly>{{paste.paste}}</textarea>
                 <textarea readonly>{{paste.syntax}}</textarea> -->
             </div>
@@ -37,6 +37,7 @@ useHead({
 });
 
 onMounted(() => {
+    console.log('eeee');
     console.log(paste.value.syntax);
     // console.log(route.params.id);
 })
