@@ -5,7 +5,7 @@
             <p>Author: <span>{{ paste.author }}</span></p>
             <div id="paste">
                 <!-- <p>{{paste.syntax}}</p> -->
-                <prism id="prism" :language="console.log(paste.syntax)">{{paste.paste}}</prism>
+                <prism id="prism" :language="logg">{{paste.paste}}</prism>
                 <!-- <textarea readonly>{{paste.paste}}</textarea>
                 <textarea readonly>{{paste.syntax}}</textarea> -->
             </div>
@@ -48,6 +48,10 @@ onMounted(() => {
     //     loadSyntax.value = true;
     // }, 3000);
 })
+const logg = () => {
+    console.log(paste.syntax);
+    return 'poop';
+}
 
 const handleNewPaste = async () => {
     await navigateTo('/')
