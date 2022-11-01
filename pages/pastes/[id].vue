@@ -40,13 +40,13 @@ useHead({
     ]
 });
 
-onBeforeMount(() => {
-    console.log(paste.value.syntax);
-})
+// onBeforeMount(() => {
+//     console.log(paste.value.syntax);
+// })
 
-onMounted(() => {
-    console.log(paste.value.syntax);
-})
+// onMounted(() => {
+//     console.log(paste.value.syntax);
+// })
 
 const handleNewPaste = async () => {
     await navigateTo('/')
