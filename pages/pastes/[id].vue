@@ -3,11 +3,8 @@
         <div v-if="paste">
             <p>Title: <span>{{ paste.title }}</span></p>
             <p>Author: <span>{{ paste.author }}</span></p>
-            <div id="paste">
-                <!-- <p>{{paste.syntax}}</p> -->
-                <prism v-if="loadSyntax" id="prism" language="text">{{paste.paste}}</prism>
-                <!-- <textarea readonly>{{paste.paste}}</textarea>
-                <textarea readonly>{{paste.syntax}}</textarea> -->
+            <div v-if="paste.syntax" id="paste">
+                <prism id="prism" language="poop">{{paste.paste}}</prism>
             </div>
         </div>
         <p v-else>Couldn't find paste with ID: {{route.params.id}}</p>
@@ -25,10 +22,7 @@ import Prism from 'vue-prism-component'
 const route = useRoute();
 const loadSyntax = ref(false);
 
-const { data: paste } = await useAsyncData(route.params.id, () => {
-    $fetch(`https://past3-api.onrender.com/pastes/${route.params.id}`);
-    loadSyntax.value = true;
-});
+const { data: paste } = await useAsyncData(route.params.id, () => $fetch(`https://past3-api.onrender.com/pastes/${route.params.id}`))
 
 // const { data: paste } = await useFetch(`http://localhost:8000/pastes/${route.params.id}`);
 
@@ -40,13 +34,17 @@ useHead({
     ]
 });
 
-// onBeforeMount(() => {
-//     console.log(paste.value.syntax);
-// })
+onBeforeMount(() => {
+    console.log(paste.value.syntax);
+})
 
-// onMounted(() => {
-//     console.log(paste.value.syntax);
-// })
+onMounted(() => {
+    console.log(paste.value.syntax);
+    // console.log(route.params.id);
+    // setTimeout(() => {
+    //     loadSyntax.value = true;
+    // }, 3000);
+})
 
 const handleNewPaste = async () => {
     await navigateTo('/')
