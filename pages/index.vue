@@ -47,22 +47,51 @@
                     </button>
                 </div>
             </div>
+            <p v-if="!authStore.loggedIn" @click="handleLogin" id="login-cta">Login to save, edit or delete your own
+                pastes!</p>
+            <p v-if="user && authStore.loggedIn" id="logout-cta">
+                Welcome,
+                <span id="user">{{ user }}</span>
+                . Click
+                <span @click="logOut" id="logout">here</span>
+                to logout or click <NuxtLink to="/pastes"><span id="logout">here</span></NuxtLink> to manage your
+                pastes.
+            </p>
         </div>
     </div>
 </template>
 
 <script setup>
+import VueJwtDecode from 'vue-jwt-decode'
 
 const paste = ref('');
 const title = ref('');
 const author = ref('');
 const syntax = ref('text');
 
+const user = ref(null);
+
 const pasteInput = ref(null);
 const titleInput = ref(null);
 const authorInput = ref(null);
 
 const themeStore = useThemeStore();
+const authStore = useAuthStore();
+
+onMounted(async () => {
+    console.log(`Logged in: ${authStore.loggedIn}`);
+
+    if (authStore.loggedIn) {
+        try {
+            const userId = VueJwtDecode.decode(authStore.token).userId;
+            console.log(userId);
+            const res = await $fetch(`https://past3-api.onrender.com/users/${userId}`)
+            user.value = res;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+})
 
 const changeTheme = () => {
     themeStore.darkMode = !themeStore.darkMode;
@@ -78,7 +107,9 @@ const handleSave = async () => {
 
 
         if (title.value && author.value && paste.value) {
-            const res = await $fetch('https://past3-api.onrender.com/pastes', {
+            let data;
+
+            if (!authStore.loggedIn) data = {
                 method: 'POST',
                 body: {
                     title: title.value,
@@ -86,7 +117,22 @@ const handleSave = async () => {
                     paste: paste.value,
                     syntax: syntax.value,
                 }
-            });
+            };
+
+            else data = {
+                method: 'POST',
+                headers: {
+                    'auth-token': authStore.token
+                },
+                body: {
+                    title: title.value,
+                    author: author.value,
+                    paste: paste.value,
+                    syntax: syntax.value,
+                }
+            };
+
+            const res = await $fetch('https://past3-api.onrender.com/pastes', data);
 
             pasteInput.value.classList.toggle("empty-input", !paste.value);
             titleInput.value.classList.toggle("empty-input", !title.value);
@@ -107,6 +153,14 @@ const handleSave = async () => {
     }
 };
 
+const handleLogin = async () => {
+    await navigateTo('/login');
+}
+
+const logOut = () => {
+    authStore.token = null;
+}
+
 const handleDelete = () => {
     title.value = '';
     author.value = '';
@@ -117,6 +171,39 @@ const handleDelete = () => {
 <style lang="scss" scoped>
 .empty-input {
     border-color: red !important;
+}
+
+p#login-cta {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+
+    &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+p#logout-cta {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+
+    & a {
+        all: unset;
+    }
+
+    & span#logout {
+        text-decoration: underline;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    & span#user {
+        color: rgb(0, 255, 170);
+    }
 }
 
 button#themeToggle {

@@ -20,6 +20,7 @@
     "pinia": "^2.0.23",
     "pinia-plugin-persistedstate": "^2.3.0",
     "prismjs": "^1.29.0",
+    "vue-jwt-decode": "^0.1.0",
     "vue-prism-component": "^2.0.0"
   }
 }

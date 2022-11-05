@@ -34,12 +34,7 @@ useHead({
     ]
 });
 
-onBeforeMount(() => {
-    console.log(paste.value.syntax);
-})
-
 onMounted(() => {
-    console.log(paste.value.syntax);
     console.log(route.params.id);
     setTimeout(() => {
         loadSyntax.value = true;
