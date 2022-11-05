@@ -207,7 +207,7 @@ p#logout-cta {
 
     @media only screen and (max-width: 800px) {
         position: initial;
-        margin-bottom: 50px;
+        margin-bottom: 20px;
     }
 }
 
