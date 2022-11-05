@@ -204,6 +204,11 @@ p#logout-cta {
     & span#user {
         color: rgb(0, 255, 170);
     }
+
+    @media only screen and (max-width: 800px) {
+        position: initial;
+        margin-bottom: 50px;
+    }
 }
 
 button#themeToggle {

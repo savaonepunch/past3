@@ -117,10 +117,12 @@ div.pastes-container {
             height: fit-content;
             padding: 30px;
             overflow-wrap: break-word;
+            word-break: break-all;
             transition: box-shadow .2s ease-in-out;
             display: flex;
             flex-direction: column;
             gap: 20px;
+    border: 1px solid var(--accent-color);
 
             &:hover {
                 box-shadow: var(--shadow) 0px 7px 29px 0px;
