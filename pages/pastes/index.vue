@@ -56,15 +56,9 @@ onMounted(async () => {
         loadingPastes.value = false;
         apiError.value = null;
     } catch (error) {
-        console.log(error.data);
-        if (error.data?.message === "Could not find any pastes") {
-            noPastesFound.value = true;
-            apiError.value = null;
-        }
-        else {
-            apiError.value = error.data;
-            noPastesFound.value = false;
-        }
+        console.log(error);
+        noPastesFound.value = true;
+        // apiError.value = null;
         loadingPastes.value = false;
     }
 });
