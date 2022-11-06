@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <form @submit.prevent="handleRegistration" class="auth-container">
+            <Icon v-if="registering" id="spinner-icon" name="gg:spinner"></Icon>
             <p v-if="apiError" id="apiError">API error: {{ apiError.data || apiError }}</p>
             <p v-if="apiSuccess" id="apiSuccess">Succesfully registered! You can now
                 <span>
@@ -37,7 +38,7 @@
                 <span class="validationError" v-if="confirmPasswordError">{{ confirmPasswordError }}</span>
 
             </div>
-            <button :disabled="inputErrors ? true : null" id="registerButton">Register</button>
+            <button :disabled="inputErrors || registering ? true : null" id="registerButton">Register</button>
             <p @click="handleRegisterCTA" id="signup-cta">Already have an account? Login!</p>
             <span id="or">- OR -</span>
             <p @click="handleGuestCTA" id="guest-cta">Continue as a guest.</p>
@@ -52,6 +53,7 @@ const passwordInput = ref(null);
 const confirmPasswordInput = ref(null);
 const apiError = ref(null);
 const apiSuccess = ref(null);
+const registering = ref(null);
 
 const nameError = ref('');
 const emailError = ref('');
@@ -102,6 +104,7 @@ const handleRegistration = async () => {
     }
 
     try {
+        registering.value = true;
         const res = await $fetch('https://past3-api.onrender.com/auth/register', {
             method: 'POST',
             body: {
@@ -111,10 +114,12 @@ const handleRegistration = async () => {
             }
         });
 
+        registering.value = false;
         console.log(res);
         apiError.value = '';
         apiSuccess.value = true;
     } catch (error) {
+        registering.value = false;
         apiSuccess.value = false;
         apiError.value = error;
         console.log(error.data);
@@ -124,6 +129,53 @@ const handleRegistration = async () => {
 </script>
 
 <style lang="scss" scoped>
+@-webkit-keyframes rotating
+
+/* Safari and Chrome */
+    {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotating {
+    from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+#spinner-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+
+    -webkit-animation: rotating 1.5s linear infinite;
+    -moz-animation: rotating 1.5s linear infinite;
+    -ms-animation: rotating 1.5s linear infinite;
+    -o-animation: rotating 1.5s linear infinite;
+    animation: rotating 1.5s linear infinite;
+
+}
+
 span.validationError {
     margin-left: 30px;
     margin-top: 15px;
