@@ -63,7 +63,7 @@ const handleLogin = async () => {
     loggingIn.value = true;
 
     try {
-        const res = await $fetch('https://past3-api.onrender.com/auth/login', {
+        const res = await $fetch('https://past3-api-production.up.railway.app/auth/login', {
             method: 'POST',
             body: {
                 email: emailInput.value,

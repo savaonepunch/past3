@@ -22,7 +22,7 @@ import Prism from 'vue-prism-component'
 const route = useRoute();
 const loadSyntax = ref(false);
 
-const { data: paste } = await useAsyncData(route.params.id, () => $fetch(`https://past3-api.onrender.com/pastes/${route.params.id}`))
+const { data: paste } = await useAsyncData(route.params.id, () => $fetch(`https://past3-api-production.up.railway.app/pastes/${route.params.id}`))
 
 // const { data: paste } = await useFetch(`http://localhost:8000/pastes/${route.params.id}`);
 
