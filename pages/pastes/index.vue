@@ -49,7 +49,7 @@ onMounted(async () => {
         const userId = VueJwtDecode.decode(authStore.token).userId;
         console.log(userId);
 
-        const res = await $fetch(`https://past3-api-production.up.railway.app/pastes/user/${userId}`, data);
+        const res = await $fetch(`https://past3-api.onrender.com/pastes/user/${userId}`, data);
         pastes.value = res;
 
         noPastesFound.value = false;

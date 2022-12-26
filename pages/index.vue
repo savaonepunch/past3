@@ -85,7 +85,7 @@ onMounted(async () => {
         try {
             const userId = VueJwtDecode.decode(authStore.token).userId;
             console.log(userId);
-            const res = await $fetch(`https://past3-api-production.up.railway.app/users/${userId}`)
+            const res = await $fetch(`https://past3-api.onrender.com/users/${userId}`)
             user.value = res;
         } catch (error) {
             console.log(error);
@@ -132,7 +132,7 @@ const handleSave = async () => {
                 }
             };
 
-            const res = await $fetch('https://past3-api-production.up.railway.app/pastes', data);
+            const res = await $fetch('https://past3-api.onrender.com/pastes', data);
 
             pasteInput.value.classList.toggle("empty-input", !paste.value);
             titleInput.value.classList.toggle("empty-input", !title.value);

@@ -105,7 +105,7 @@ const handleRegistration = async () => {
 
     try {
         registering.value = true;
-        const res = await $fetch('https://past3-api-production.up.railway.app/auth/register', {
+        const res = await $fetch('https://past3-api.onrender.com/auth/register', {
             method: 'POST',
             body: {
                 name: nameInput.value,
